@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veloce | The Ultimate Driving Machine</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor">
+        <!-- Stationary Brake Assembly -->
+        <div class="cursor-caliper">
+            <svg viewBox="0 0 100 100">
+                <!-- Brake Disc Rotor -->
+                <circle cx="50" cy="50" r="33" fill="rgba(80, 80, 85, 0.25)" stroke="#666" stroke-width="1.5" />
+                <circle cx="50" cy="50" r="26" stroke="#444" stroke-width="1" stroke-dasharray="2, 6" fill="none" />
+                <circle cx="50" cy="50" r="18" stroke="#444" stroke-width="1" stroke-dasharray="2, 8" fill="none" />
+                <!-- Caliper -->
+                <path class="caliper-pad" d="M 72 26 A 32 32 0 0 0 58 16" stroke="#0087ff" stroke-width="9" stroke-linecap="round" fill="none" />
+            </svg>
+        </div>
+        <!-- Rotating Wheel/Tire -->
+        <div class="cursor-wheel">
+            <svg viewBox="0 0 100 100">
+                <defs>
+                    <g id="wheel-spoke">
+                        <line x1="50" y1="50" x2="50" y2="28" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+                        <path d="M 50 28 L 44 20 M 50 28 L 56 20" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+                    </g>
+                </defs>
+                <!-- Outer tire rubber -->
+                <circle cx="50" cy="50" r="45" stroke="#121214" stroke-width="10" fill="none" />
+                <!-- Tire treads -->
+                <circle cx="50" cy="50" r="48" stroke="#050506" stroke-width="1.5" stroke-dasharray="3, 5" fill="none" />
+                <circle cx="50" cy="50" r="42" stroke="#050506" stroke-width="1.5" stroke-dasharray="3, 5" fill="none" />
+                <!-- Outer Rim Edge -->
+                <circle cx="50" cy="50" r="38" stroke="#dddddd" stroke-width="1.5" fill="none" />
+                <!-- Spokes -->
+                <g transform="rotate(0 50 50)"><use href="#wheel-spoke" /></g>
+                <g transform="rotate(72 50 50)"><use href="#wheel-spoke" /></g>
+                <g transform="rotate(144 50 50)"><use href="#wheel-spoke" /></g>
+                <g transform="rotate(216 50 50)"><use href="#wheel-spoke" /></g>
+                <g transform="rotate(288 50 50)"><use href="#wheel-spoke" /></g>
+                <!-- Center Cap -->
+                <circle cx="50" cy="50" r="8" fill="#161618" stroke="#cccccc" stroke-width="1.5" />
+                <circle cx="50" cy="50" r="3" fill="#0087ff" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- Preloader -->
+    <div id="loader">
+        <div class="loader-content">
+            <div class="logo-wrapper">
+                <span class="logo-text">VELOCE</span>
+            </div>
+        </div>
+        <div class="progress-wrapper">
+            <div class="progress-line-container">
+                <div class="progress-line"></div>
+                <div class="progress-bar"></div>
+                <div class="car-container">
+                    <img src="loading car.png" alt="Car" id="loading-car">
+                </div>
+            </div>
+            <div class="progress-text">0%</div>
+        </div>
+    </div>
+
+
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">VELOCE</div>
+        <div class="nav-links">
+            <a href="#">Models</a>
+            <a href="#">Heritage</a>
+            <a href="#">Shop</a>
+        </div>
+        <div class="nav-menu">
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div id="hero-pin-container">
+            <section id="hero">
+                <div class="canvas-container">
+                    <canvas id="sequence-canvas"></canvas>
+                </div>
+
+                <div class="hero-content">
+                    <div class="eyebrow">LEGENDARY PERFORMANCE</div>
+                    <h1>VELOCE 911</h1>
+                    <div class="cta-group">
+                        <button class="btn-primary">EXPLORE</button>
+                    </div>
+                </div>
+
+                <div class="bottom-info">
+                    <div class="info-item">
+                        <span class="label">ENGINE</span>
+                        <span class="value">4.0L FLAT-6</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">0-100 KM/H</span>
+                        <span class="value">3.2 SEC</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">TOP SPEED</span>
+                        <span class="value">312 KM/H</span>
+                    </div>
+                </div>
+
+                <div class="scroll-hint">
+                    <span>SCROLL</span>
+                    <div class="mouse"></div>
+                </div>
+            </section>
+
+        </div>
+
+        <section id="about-editorial" aria-label="About the Veloce GT2 RS">
+            <div class="about-label">
+                <span class="label-marker"></span>
+                <span>About us</span>
+            </div>
+
+            <div class="editorial-copy"
+                aria-label="Built for drivers who demand absolute precision, the Veloce GT2 RS represents the peak of German performance engineering. From its aerodynamic body to its relentless twin-turbo acceleration, every detail is crafted for speed, control, and emotion.">
+                <span class="copy-line">Built for drivers who demand absolute precision,</span>
+                <span class="copy-line">the Veloce GT2 RS represents the peak of German</span>
+                <span class="copy-line">performance engineering. From its aerodynamic</span>
+                <span class="copy-line">body to its relentless twin-turbo acceleration, every</span>
+                <span class="copy-line">detail is crafted for speed, control, and emotion.</span>
+            </div>
+        </section>
+
+        <section id="gallery-pin-container">
+            <div class="gallery-bg-glow"></div>
+            <div class="gallery-wrapper">
+                <div class="gallery-grid">
+                    <div class="gallery-item item-1">
+                        <img src="image/image 1.png" loading="lazy" alt="Veloce GT2 RS Profile">
+                    </div>
+                    <div class="gallery-item item-2">
+                        <img src="image/image 2.png" loading="lazy" alt="Veloce GT2 RS Front">
+                    </div>
+                    <div class="gallery-item item-3">
+                        <img src="image/image 3.png" loading="lazy" alt="Veloce GT2 RS Detail">
+                    </div>
+                    <!-- Central Hero Image -->
+                    <div class="gallery-item item-4 center-hero">
+                        <img src="image/image 4.png" loading="lazy" alt="Veloce GT2 RS Interior">
+                    </div>
+                    <div class="gallery-item item-5">
+                        <img src="image/image 5.png" loading="lazy" alt="Veloce GT2 RS Rear">
+                    </div>
+                    <div class="gallery-item item-6">
+                        <img src="image/image 6.png" loading="lazy" alt="Veloce GT2 RS Action">
+                    </div>
+                    <div class="gallery-item item-7">
+                        <img src="image/image 7.png" loading="lazy" alt="Veloce GT2 RS Track">
+                    </div>
+                </div>
+
+                <div class="gallery-content-overlay">
+                    <div class="content-inner">
+                        <div class="content-label">CURATED PERFORMANCE</div>
+                        <h2 class="content-heading">
+                            <span class="heading-line">Every angle reveals</span>
+                            <span class="heading-line">a different expression</span>
+                            <span class="heading-line">of performance.</span>
+                        </h2>
+                        <p class="content-description">
+                            From studio-lit precision shots to open-road dominance,
+                            the Veloce GT2 RS is engineered to command attention
+                            in every environment.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Specifications Horizontal Scroll -->
+        <section id="specs-horizontal">
+            <div class="specs-bg-blueprint"></div>
+            <div class="specs-pin-wrapper">
+                <div class="specs-track">
+                    <div class="specs-header">
+                        <div class="specs-title">TECHNICAL <br> DNA</div>
+                        <div class="specs-subtitle">GT2 RS ENGINEERING OVERVIEW</div>
+                    </div>
+                    
+                    <div class="spec-card">
+                        <div class="spec-bg-num">700</div>
+                        <div class="spec-unit">HORSEPOWER</div>
+                        <div class="spec-detail">3.8L Twin-Turbo Flat-Six Engine</div>
+                    </div>
+
+                    <div class="spec-image-card">
+                        <img src="image/image 3.png" alt="Detail 1">
+                        <div class="image-label">ENGINE BLOCK PRECISION</div>
+                    </div>
+
+                    <div class="spec-card">
+                        <div class="spec-bg-num">2.8</div>
+                        <div class="spec-unit">SECONDS</div>
+                        <div class="spec-detail">0-100 km/h Acceleration</div>
+                    </div>
+
+                    <div class="spec-card">
+                        <div class="spec-number">340</div>
+                        <div class="spec-bg-num">340</div>
+                        <div class="spec-unit">KM/H</div>
+                        <div class="spec-detail">Unmatched Top Track Speed</div>
+                    </div>
+
+                    <div class="spec-image-card large">
+                        <img src="image/image 2.png" alt="Detail 2">
+                        <div class="image-label">AERODYNAMIC PROFILE</div>
+                    </div>
+
+                    <div class="spec-card">
+                        <div class="spec-bg-num">750</div>
+                        <div class="spec-unit">NM TORQUE</div>
+                        <div class="spec-detail">Peak performance at 2,500-4,500 rpm</div>
+                    </div>
+
+                    <div class="spec-card">
+                        <div class="spec-bg-num">1470</div>
+                        <div class="spec-unit">KG WEIGHT</div>
+                        <div class="spec-detail">Lightweight Construction Excellence</div>
+                    </div>
+                    
+                    <div class="spec-image-card end-car">
+                        <img src="image/image 7.png" alt="The Beast">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Veloce Finder Section -->
+        <section id="veloce-finder">
+            <div class="finder-container">
+                <div class="finder-content">
+                    <h3>Find your new or pre-owned Veloce.</h3>
+                    <p>A Veloce is as individual as its owner. It is always an expression of one's own personality. We help you find your personal dream vehicle from authorised Veloce Centres.</p>
+                    <a href="#" class="btn-finder">Find your Veloce</a>
+                </div>
+                <div class="finder-image">
+                    <img src="image/image 1.png" alt="Veloce Selection">
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="site-footer">
+
+            <div class="footer-banner">
+                <img src="image/image 4.png" alt="Veloce GT2 RS Panorama">
+            </div>
+
+            <div class="footer-nav-main">
+                <div class="nav-logo">VELOCE</div>
+                <div class="nav-links">
+                    <a href="#">MODELS</a>
+                    <a href="#">HERITAGE</a>
+                    <a href="#">MOTORSPORT</a>
+                </div>
+                <div class="nav-social">
+                    <a href="#"><i class="social-icon">𝕏</i></a>
+                    <a href="#"><i class="social-icon">in</i></a>
+                </div>
+            </div>
+
+            <div class="footer-legal-bar">
+                <p class="copyright">Copyright © 2026 Veloce AG</p>
+                <div class="legal-group">
+                    <a href="#">Status</a>
+                    <a href="#">Terms of Use</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
